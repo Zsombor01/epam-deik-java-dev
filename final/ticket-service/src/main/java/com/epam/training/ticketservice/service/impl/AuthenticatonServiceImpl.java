@@ -27,11 +27,12 @@ public class AuthenticatonServiceImpl implements AuthenticationService {
     @Override
     public Result<?, AuthenticationException> login(String username, String password, boolean privileged) {
         Authentication auth = new UsernamePasswordAuthenticationToken(username, password);
-        try{
+        try {
             var result = authManager.authenticate(auth);
             var hasAdmin = result.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-            if(privileged && !hasAdmin || !privileged && hasAdmin)
+            if (privileged && !hasAdmin || !privileged && hasAdmin) {
                 throw new BadCredentialsException("Username or password is incorrect");
+            }
             SecurityContextHolder.getContext().setAuthentication(result);
             return Result.ok(null);
         } catch (AuthenticationException e) {
@@ -41,7 +42,7 @@ public class AuthenticatonServiceImpl implements AuthenticationService {
 
     @Override
     public Result<?, AuthenticationException> logout() {
-        try{
+        try {
             SecurityContextHolder.getContext().setAuthentication(null);
             return Result.ok(null);
         } catch (AuthenticationException e) {

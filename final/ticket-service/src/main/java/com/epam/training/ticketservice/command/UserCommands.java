@@ -5,11 +5,11 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
 @ShellComponent
-public class UserCommands extends PrivilegedCommands{
+public class UserCommands extends PrivilegedCommands {
 
     @ShellMethodAvailability("isSignedIn")
-    @ShellMethod(key="describe account", value="blah blah")
-    public String describe(){
+    @ShellMethod(key = "describe account", value = "blah blah")
+    public String describe() {
         return "";
     }
 }

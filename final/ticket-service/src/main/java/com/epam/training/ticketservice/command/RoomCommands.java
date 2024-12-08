@@ -9,44 +9,44 @@ import org.springframework.shell.standard.ShellMethodAvailability;
 
 @ShellComponent
 @RequiredArgsConstructor
-public class RoomCommands extends PrivilegedCommands{
+public class RoomCommands extends PrivilegedCommands {
 
     private final RoomService service;
 
     @ShellMethodAvailability("isAdmin")
-    @ShellMethod(key="create room", value="Usage: <name> <number of rows> <number of columns>")
-    public String createRoom(String name, int rows, int columns){
+    @ShellMethod(key = "create room", value = "Usage: <name> <number of rows> <number of columns>")
+    public String createRoom(String name, int rows, int columns) {
         var res = service.createRoom(name, rows, columns);
-        return switch (res.state()){
+        return switch (res.state()) {
             case OK -> "Successfully created room";
             case ERROR -> "Failed to create room: " + res.error().getMessage();
         };
     }
 
     @ShellMethodAvailability("isAdmin")
-    @ShellMethod(key="update room", value="Usage: <name> <number of rows> <number of columns>")
-    public String updateRoom(String name, int rows, int columns){
+    @ShellMethod(key = "update room", value = "Usage: <name> <number of rows> <number of columns>")
+    public String updateRoom(String name, int rows, int columns) {
         var res = service.updateRoom(name, rows, columns);
-        return switch (res.state()){
+        return switch (res.state()) {
             case OK -> "Successfully updated room";
             case ERROR -> "Failed to update room: " + res.error().getMessage();
         };
     }
 
     @ShellMethodAvailability("isAdmin")
-    @ShellMethod(key="delete room", value="Usage: <name>")
-    public String deleteRoom(String name){
+    @ShellMethod(key = "delete room", value = "Usage: <name>")
+    public String deleteRoom(String name) {
         var res = service.deleteRoom(name);
-        return switch (res.state()){
+        return switch (res.state()) {
             case OK -> "Successfully updated room";
             case ERROR -> "Failed to update room: " + res.error().getMessage();
         };
     }
 
-    @ShellMethod(key="list rooms", value="List all rooms.")
-    public String listRooms(){
+    @ShellMethod(key = "list rooms", value = "List all rooms.")
+    public String listRooms() {
         var res = service.listRooms();
-        if(res.isOk()){
+        if (res.isOk()) {
             return OutputUtils.toString(res.result(), "There are no rooms at the moment");
         } else {
             return "An error occured: " + res.error().getMessage();

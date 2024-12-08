@@ -6,31 +6,35 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.shell.Availability;
 
 public abstract class PrivilegedCommands {
-    protected Availability isAdmin(){
+    protected Availability isAdmin() {
         var auth = getAuth();
-        if(!(auth instanceof UsernamePasswordAuthenticationToken))
+        if (!(auth instanceof UsernamePasswordAuthenticationToken)) {
             return Availability.unavailable("You ");
-        if(auth.getAuthorities().stream().noneMatch(x -> x.getAuthority().equals("ROLE_ADMIN")))
+        }
+        if (auth.getAuthorities().stream().noneMatch(x -> x.getAuthority().equals("ROLE_ADMIN"))) {
             return Availability.unavailable("You are not admin");
+        }
 
         return Availability.available();
     }
 
-    protected Availability isSignedIn(){
+    protected Availability isSignedIn() {
         var auth = getAuth();
-        if(auth instanceof UsernamePasswordAuthenticationToken)
+        if (auth instanceof UsernamePasswordAuthenticationToken) {
             return Availability.available();
+        }
         return Availability.unavailable("You are not signed in");
     }
 
-    protected Availability isSignedOut(){
+    protected Availability isSignedOut() {
         var auth = getAuth();
-        if(auth instanceof UsernamePasswordAuthenticationToken)
+        if (auth instanceof UsernamePasswordAuthenticationToken) {
             return Availability.unavailable("You are already signed in");
+        }
         return Availability.available();
     }
 
-    private Authentication getAuth(){
+    private Authentication getAuth() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 }

@@ -3,12 +3,20 @@ package com.epam.training.ticketservice.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name="movies")
+@Table(name = "movies")
 @NoArgsConstructor
 public class Movie {
     @Id
@@ -19,11 +27,11 @@ public class Movie {
     private String category;
     private int length;
 
-    @OneToMany(mappedBy="movie")
+    @OneToMany(mappedBy = "movie")
     private List<Screening> screenings;
 
     @OneToOne
-    @JoinColumn(name="component_id", referencedColumnName = "id")
+    @JoinColumn(name = "component_id", referencedColumnName = "id")
     private PriceComponent priceComponent;
 
     public Movie(String title, String category, int length) {

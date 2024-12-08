@@ -6,6 +6,8 @@ import org.springframework.security.core.AuthenticationException;
 
 public interface AuthenticationService {
     Result<?, OperationException> signup(String username, String password);
+
     Result<?, AuthenticationException> login(String username, String password, boolean privileged);
+
     Result<?, AuthenticationException> logout();
 }
