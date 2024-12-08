@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.dto;
 
+
 import com.epam.training.ticketservice.model.Screening;
 
 public class ScreeningDto {
@@ -15,6 +16,6 @@ public class ScreeningDto {
 
     public String toString() {
         return movie.getTitle() + " (" + movie.getCategory() + ", " + movie.getLength()
-            + " minutes), screened in room " + roomName + ", at " + startTime;
+                + " minutes), screened in room " + roomName + ", at " + startTime;
     }
 }

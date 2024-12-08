@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class ComponentServiceImpl implements ComponentService {
@@ -66,7 +67,7 @@ public class ComponentServiceImpl implements ComponentService {
     public Result<?, OperationException> attachToScreening(String componentName, String movieTitle, String roomName,
                                                            String startTime) {
         var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName,
-            LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
+                LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
         if (screening.isEmpty()) {
             return Result.err(new NotFoundException("Screening"));
         }

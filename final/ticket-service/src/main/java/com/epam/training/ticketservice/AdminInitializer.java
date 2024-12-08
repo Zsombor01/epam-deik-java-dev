@@ -14,7 +14,7 @@ public class AdminInitializer {
     private final UserRepository repository;
 
     @PostConstruct
-    private void createAdmin(){
+    private void createAdmin() {
         repository.save(new User("admin", "admin", UserRole.ADMIN));
     }
 }

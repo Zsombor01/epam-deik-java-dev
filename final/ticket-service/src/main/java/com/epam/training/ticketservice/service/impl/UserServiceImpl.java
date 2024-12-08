@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     public Result<UserDto, OperationException> getUser(String username) {
         var user = repository.findByUsername(username);
         return user.<Result<UserDto, OperationException>>map(value -> Result.ok(new UserDto(value)))
-            .orElseGet(() -> Result.err(new NotFoundException("User")));
+                .orElseGet(() -> Result.err(new NotFoundException("User")));
     }
 
     @Override

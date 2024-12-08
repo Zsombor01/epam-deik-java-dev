@@ -6,12 +6,9 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
-import java.time.LocalDateTime;
-
 @ShellComponent
 @RequiredArgsConstructor
 public class ScreeningCommands extends PrivilegedCommands {
-
     private final ScreeningService service;
 
     @ShellMethodAvailability("isAdmin")
