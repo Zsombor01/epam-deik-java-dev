@@ -2,6 +2,8 @@ package com.epam.training.ticketservice.util;
 
 import org.jetbrains.annotations.UnknownNullability;
 
+import java.util.function.Function;
+
 public sealed interface Result<T, E extends Exception> permits Result.Ok, Result.Err {
     @UnknownNullability
     T result();
@@ -14,6 +16,10 @@ public sealed interface Result<T, E extends Exception> permits Result.Ok, Result
     boolean isErr();
 
     State state();
+
+    <N> Result<N, E> mapResult(Function<T, N> mapper);
+
+    <N extends Exception> Result<T, N> mapError(Function<E, N> mapper);
 
     static <T, E extends Exception> Result<T, E> ok(T result){
         return new Ok<>(result);
@@ -47,6 +53,16 @@ public sealed interface Result<T, E extends Exception> permits Result.Ok, Result
         public State state(){
             return State.OK;
         }
+
+        @Override
+        public <N> Result<N, E> mapResult(Function<T, N> mapper){
+            return new Ok<>(mapper.apply(result()));
+        }
+
+        @Override
+        public <N extends Exception> Result<T, N> mapError(Function<E, N> mapper){
+            throw new IllegalStateException("Tried to map error value on OK result");
+        }
     }
 
     record Err<T, E extends Exception>(E error) implements Result<T, E>{
@@ -69,6 +85,16 @@ public sealed interface Result<T, E extends Exception> permits Result.Ok, Result
         @Override
         public State state(){
             return State.ERROR;
+        }
+
+        @Override
+        public <N> Result<N, E> mapResult(Function<T, N> mapper){
+            throw new IllegalStateException("Tried to map result value on Err result");
+        }
+
+        @Override
+        public <N extends Exception> Result<T, N> mapError(Function<E, N> mapper){
+            return new Err<>(mapper.apply(error));
         }
     }
 }
