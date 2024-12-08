@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,7 +38,7 @@ public class Screening {
     @OneToMany(mappedBy = "screening")
     private List<Booking> bookings;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "component_id", referencedColumnName = "id")
     private PriceComponent priceComponent;
 

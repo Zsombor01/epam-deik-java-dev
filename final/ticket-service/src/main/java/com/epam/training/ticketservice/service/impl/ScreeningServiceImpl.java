@@ -26,15 +26,15 @@ public class ScreeningServiceImpl implements ScreeningService {
     @Override
     public Result<?, OperationException> createScreening(String movieTitle, String roomName, String start) {
         var startDate = LocalDateTime.parse(start, Screening.TIME_FORMAT);
-        if(screeningRepository.existsByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, startDate)) {
+        if (screeningRepository.existsByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, startDate)) {
             return Result.err(new AlreadyExistsException("Screening"));
         }
         var movie = movieRepository.findByTitle(movieTitle);
-        if(movie.isEmpty()){
+        if (movie.isEmpty()) {
             return Result.err(new NotFoundException("Movie"));
         }
         var room = roomRepository.findByName(roomName);
-        if(room.isEmpty()){
+        if (room.isEmpty()) {
             return Result.err(new NotFoundException("Room"));
         }
         screeningRepository.save(new Screening(movie.get(), room.get(), startDate));
