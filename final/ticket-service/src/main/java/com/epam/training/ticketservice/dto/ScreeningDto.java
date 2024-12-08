@@ -2,7 +2,9 @@ package com.epam.training.ticketservice.dto;
 
 
 import com.epam.training.ticketservice.model.Screening;
+import lombok.Getter;
 
+@Getter
 public class ScreeningDto {
     private final MovieDto movie;
     private final String roomName;

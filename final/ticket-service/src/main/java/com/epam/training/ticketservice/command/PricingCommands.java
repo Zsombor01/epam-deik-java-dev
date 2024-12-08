@@ -45,7 +45,7 @@ public class PricingCommands extends PrivilegedCommands {
     }
 
     @ShellMethod(key = "attach price component to screening",
-        value = "Usage: <component name> <room name> <start time>")
+            value = "Usage: <component name> <room name> <start time>")
     public String attachToScreening(String name, String movieTitle, String roomName, String startTime) {
         var res = service.attachToScreening(name, movieTitle, roomName, startTime);
         return switch (res.state()) {
@@ -54,6 +54,7 @@ public class PricingCommands extends PrivilegedCommands {
         };
     }
 
+    @ShellMethod(key = "show price for", value = "Usage: <movie title> <room name> <start time> <seats>")
     public String showPricing(String movie, String room, LocalDateTime start, String seats) {
         return "";
     }

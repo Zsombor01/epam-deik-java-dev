@@ -53,7 +53,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
-    public Result<List<ScreeningDto>, OperationException> listScreening() {
+    public Result<List<ScreeningDto>, OperationException> listScreenings() {
         return Result.ok(screeningRepository.findAll().stream().map(ScreeningDto::new).toList());
     }
 }

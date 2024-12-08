@@ -1,7 +1,9 @@
 package com.epam.training.ticketservice.dto;
 
 import com.epam.training.ticketservice.model.Room;
+import lombok.Getter;
 
+@Getter
 public class RoomDto {
     private final String name;
     private final int rows;

@@ -11,5 +11,5 @@ public interface ScreeningService {
 
     Result<?, OperationException> deleteScreening(String movie, String room, String start);
 
-    Result<List<ScreeningDto>, OperationException> listScreening();
+    Result<List<ScreeningDto>, OperationException> listScreenings();
 }
