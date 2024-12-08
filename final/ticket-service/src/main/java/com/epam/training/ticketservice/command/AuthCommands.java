@@ -16,8 +16,8 @@ public class AuthCommands extends PrivilegedCommands {
     public String login(String username, String password) {
         var res = service.login(username, password, false);
         return switch (res.state()) {
-            case OK -> "Sign in successful";
-            case ERROR -> "Failed to sign in: " + res.error().getMessage();
+            case OK -> "Login was successful";
+            case ERROR -> "Login failed due to incorrect credentials";
         };
     }
 
@@ -26,8 +26,8 @@ public class AuthCommands extends PrivilegedCommands {
     public String loginAdmin(String username, String password) {
         var res = service.login(username, password, true);
         return switch (res.state()) {
-            case OK -> "Sign in successful";
-            case ERROR -> "Failed to sign in: " + res.error().getMessage();
+            case OK -> "Login was successful";
+            case ERROR -> "Login failed due to incorrect credentials";
         };
     }
 
