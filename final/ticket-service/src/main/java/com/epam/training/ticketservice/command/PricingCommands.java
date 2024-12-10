@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.command;
 
+import com.epam.training.ticketservice.component.BasePriceHolder;
 import com.epam.training.ticketservice.service.ComponentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
