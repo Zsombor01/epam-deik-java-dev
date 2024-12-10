@@ -1,0 +1,15 @@
+spring:
+  shell:
+    interactive:
+      enabled: false
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  config:
+    activate:
+      on-profile: ci
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect

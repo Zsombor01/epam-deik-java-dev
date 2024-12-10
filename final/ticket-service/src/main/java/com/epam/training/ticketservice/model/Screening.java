@@ -57,6 +57,6 @@ public class Screening {
         var otherStart = other.getStartTime();
         var otherEnd = otherStart.plusMinutes(other.getMovie().getLength() + breakTime);
 
-        return start.isBefore(otherStart) && end.isAfter(otherStart) || start.isAfter(otherStart) && end.isBefore(otherEnd);
+        return !(end.isBefore(otherStart) || end.isAfter(otherEnd));
     }
 }
