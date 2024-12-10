@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "screening")
+@Table(name = "screenings")
 @NoArgsConstructor
 public class Screening {
     public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -37,7 +38,7 @@ public class Screening {
     @Column(nullable = false)
     private LocalDateTime startTime;
 
-    @OneToMany(mappedBy = "screening")
+    @OneToMany(mappedBy = "screening", fetch = FetchType.EAGER)
     private List<Booking> bookings;
 
     @ManyToOne
@@ -48,5 +49,14 @@ public class Screening {
         this.movie = movie;
         this.room = room;
         this.startTime = startTime;
+    }
+
+    public boolean isOverLapping(Screening other, int breakTime){
+        var start = getStartTime();
+        var end = start.plusMinutes(movie.getLength() + breakTime);
+        var otherStart = other.getStartTime();
+        var otherEnd = otherStart.plusMinutes(other.getMovie().getLength() + breakTime);
+
+        return start.isBefore(otherStart) && end.isAfter(otherStart) || start.isAfter(otherStart) && end.isBefore(otherEnd);
     }
 }
