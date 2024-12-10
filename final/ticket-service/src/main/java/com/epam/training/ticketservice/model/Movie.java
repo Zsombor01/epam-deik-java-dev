@@ -22,10 +22,12 @@ import java.util.List;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(unique = true)
+    private Long id;
+    @Column(unique = true, nullable = false)
     private String title;
+    @Column(nullable = false)
     private String category;
+    @Column(nullable = false)
     private int length;
 
     @OneToMany(mappedBy = "movie")
