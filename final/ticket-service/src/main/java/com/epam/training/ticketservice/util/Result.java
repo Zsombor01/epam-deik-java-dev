@@ -5,6 +5,8 @@ import org.jetbrains.annotations.UnknownNullability;
 import java.util.function.Function;
 
 public sealed interface Result<T, E extends Exception> permits Result.Ok, Result.Err {
+
+
     static <T, E extends Exception> Result<T, E> ok(T result) {
         return new Ok<>(result);
     }

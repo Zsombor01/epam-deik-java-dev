@@ -28,6 +28,7 @@ public class BookingCommands extends PrivilegedCommands {
                 + "; the price for this booking is " + dto.getPrice() + " HUF";
     }
 
+    @ShellMethod(key = "show price for", value = "Usage: <movie title> <room name> <start time> <seats>")
     public String showPricing(String movie, String room, String start, String seats) {
         var res = service.viewPricing(movie, room, start, seats);
         return switch (res.state()) {

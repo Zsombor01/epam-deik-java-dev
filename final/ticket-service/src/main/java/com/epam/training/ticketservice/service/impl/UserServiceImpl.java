@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result<UserDto, OperationException> getUser(Authentication auth) {
-        if(auth == null) {
+        if (auth == null) {
             return Result.err(new NotFoundException("User not found"));
         }
         var user = repository.findByUsername(auth.getName());

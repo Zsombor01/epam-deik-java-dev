@@ -7,8 +7,6 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
-import java.time.LocalDateTime;
-
 @ShellComponent
 @RequiredArgsConstructor
 public class PricingCommands extends PrivilegedCommands {
@@ -54,7 +52,7 @@ public class PricingCommands extends PrivilegedCommands {
 
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "attach price component to screening",
-            value = "Usage: <component name> <room name> <start time>")
+            value = "Usage: <component name> <movie title> <room name> <start time>")
     public String attachToScreening(String name, String movieTitle, String roomName, String startTime) {
         var res = service.attachToScreening(name, movieTitle, roomName, startTime);
         return switch (res.state()) {

@@ -49,7 +49,7 @@ public class RoomCommands extends PrivilegedCommands {
         if (res.isOk()) {
             return OutputUtils.toString(res.result(), "There are no rooms at the moment");
         } else {
-            return "An error occured: " + res.error().getMessage();
+            return "An error occurred: " + res.error().getMessage();
         }
     }
 }

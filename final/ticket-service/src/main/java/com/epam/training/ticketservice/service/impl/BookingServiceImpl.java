@@ -18,7 +18,6 @@ import com.epam.training.ticketservice.repositories.UserRepository;
 import com.epam.training.ticketservice.service.BookingService;
 import com.epam.training.ticketservice.util.Result;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

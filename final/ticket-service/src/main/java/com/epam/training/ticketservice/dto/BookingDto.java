@@ -4,7 +4,6 @@ import com.epam.training.ticketservice.model.Booking;
 import com.epam.training.ticketservice.model.Seat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
@@ -15,13 +14,14 @@ public class BookingDto {
     private final List<Seat> seats;
     private final int price;
 
-    public BookingDto(Booking dao){
+    public BookingDto(Booking dao) {
         this.screening = new ScreeningDto(dao.getScreening());
         this.seats = Seat.fromString(dao.getSeats());
         this.price = dao.getPrice();
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         return "Seats " + String.join(", ", seats.stream().map(Seat::toString).toList())
                 + "on " + screening.getMovie().getTitle()
                 + " in room " + screening.getRoomName()

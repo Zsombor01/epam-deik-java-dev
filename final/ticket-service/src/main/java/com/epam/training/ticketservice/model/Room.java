@@ -25,9 +25,9 @@ public class Room {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(name="rownumber", nullable = false)
+    @Column(name = "rownumber", nullable = false)
     private int rows;
-    @Column(name="colnumber", nullable = false)
+    @Column(name = "colnumber", nullable = false)
     private int columns;
 
     @OneToMany(mappedBy = "room")

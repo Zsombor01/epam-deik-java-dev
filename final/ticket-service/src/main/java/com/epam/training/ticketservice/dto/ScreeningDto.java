@@ -2,9 +2,11 @@ package com.epam.training.ticketservice.dto;
 
 
 import com.epam.training.ticketservice.model.Screening;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode
 public class ScreeningDto {
     private final MovieDto movie;
     private final String roomName;
@@ -16,6 +18,7 @@ public class ScreeningDto {
         this.startTime = dao.getStartTime().format(Screening.TIME_FORMAT);
     }
 
+    @Override
     public String toString() {
         return movie.toString() + ", screened in room " + roomName + ", at" + startTime;
     }
