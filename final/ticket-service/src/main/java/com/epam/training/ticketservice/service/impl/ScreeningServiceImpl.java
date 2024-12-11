@@ -42,17 +42,17 @@ public class ScreeningServiceImpl implements ScreeningService {
         var inRoom = screeningRepository.findAllByRoomName(roomName);
         if (!inRoom.isEmpty()) {
             for (var other : inRoom) {
-                if (screening.isOverLapping(other)) {
-                    return Result.err(new OperationException("There is an overlapping in screening"));
-                }
-
-                var otherEnd = other.getStartTime().plusMinutes(other.getMovie().getLength());
-                var breakEnd = otherEnd.plusMinutes(10);
-                if (startDate.isAfter(otherEnd) && startDate.isBefore(breakEnd)) {
-                    return Result.err(new OperationException("This would start in the break period after another screening in this room"));
+                if (screening.isOverlapping(other, 10)) {
+                    if (screening.isOverlapping(other, 0)) {
+                        return Result.err(new OperationException("There is an overlapping screening"));
+                    } else {
+                        return Result.err(new OperationException(
+                                "This would start in the break period after another screening in this room"));
+                    }
                 }
             }
         }
+
         screeningRepository.save(screening);
         return Result.ok(null);
     }

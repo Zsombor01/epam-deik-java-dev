@@ -13,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 public class GenericCliProcessStepDefs {
 
-    private static final int OUTPUT_TIMEOUT = 50000;
+    private static final int OUTPUT_TIMEOUT = 30000;
 
     private ProcessUnderTest cliProcess;
 

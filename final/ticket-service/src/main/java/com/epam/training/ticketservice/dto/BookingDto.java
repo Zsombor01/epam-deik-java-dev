@@ -23,7 +23,7 @@ public class BookingDto {
     @Override
     public String toString() {
         return "Seats " + String.join(", ", seats.stream().map(Seat::toString).toList())
-                + "on " + screening.getMovie().getTitle()
+                + " on " + screening.getMovie().getTitle()
                 + " in room " + screening.getRoomName()
                 + " starting at " + screening.getStartTime() + " for " + price + " HUF";
     }

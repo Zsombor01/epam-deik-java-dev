@@ -51,11 +51,11 @@ public class Screening {
         this.startTime = startTime;
     }
 
-    public boolean isOverLapping(Screening other) {
+    public boolean isOverlapping(Screening other, int breakTime) {
         var start = getStartTime();
-        var end = start.plusMinutes(movie.getLength());
+        var end = start.plusMinutes(movie.getLength() + breakTime);
         var otherStart = other.getStartTime();
-        var otherEnd = otherStart.plusMinutes(other.getMovie().getLength());
+        var otherEnd = otherStart.plusMinutes(other.getMovie().getLength() + breakTime);
 
         return !(end.isBefore(otherStart) || start.isAfter(otherEnd));
     }
