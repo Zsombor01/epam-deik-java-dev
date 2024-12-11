@@ -12,7 +12,8 @@ import java.util.List;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    List<Booking> findAllByScreeningMovieAndScreeningRoomAndScreeningStartTime(Movie movie, Room room, LocalDateTime startTime);
+    List<Booking> findAllByScreeningMovieAndScreeningRoomAndScreeningStartTime(Movie movie, Room room,
+                                                                               LocalDateTime startTime);
 
     List<Booking> findAllByScreening(Screening screening);
 }

@@ -37,7 +37,8 @@ public class BookingServiceImpl implements BookingService {
     private final AuthenticationHolder authHolder;
 
     @Override
-    public Result<BookingDto, OperationException> createBooking(String movieTitle, String roomName, String startTime, String seatsRaw) {
+    public Result<BookingDto, OperationException> createBooking(String movieTitle, String roomName, String startTime,
+                                                                String seatsRaw) {
         var movie = movieRepository.findByTitle(movieTitle);
         if (movie.isEmpty()) {
             return Result.err(new NotFoundException("Movie"));
@@ -48,7 +49,8 @@ public class BookingServiceImpl implements BookingService {
             return Result.err(new NotFoundException("Room"));
         }
 
-        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
+        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName,
+                LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
         if (screening.isEmpty()) {
             return Result.err(new NotFoundException("Screening"));
         }
@@ -65,14 +67,17 @@ public class BookingServiceImpl implements BookingService {
         }
 
         var username = authHolder.getAuthentication().getName();
-        var booking = new Booking(userRepository.findByUsername(username).get(), screening.get(), seatsRaw, calculator.calculate(screening.get(), basePriceHolder.getBasePrice(), seats.size()));
+        var booking = new Booking(userRepository.findByUsername(username).get(), screening.get(), seatsRaw,
+                calculator.calculate(screening.get(), basePriceHolder.getBasePrice(), seats.size()));
         bookingRepository.save(booking);
         return Result.ok(new BookingDto(booking));
     }
 
     @Override
-    public Result<String, OperationException> viewPricing(String movieTitle, String roomName, String startTime, String seatsRaw) {
-        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName, LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
+    public Result<String, OperationException> viewPricing(String movieTitle, String roomName, String startTime,
+                                                          String seatsRaw) {
+        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName,
+                LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
         if (screening.isEmpty()) {
             return Result.err(new NotFoundException("Screening"));
         }

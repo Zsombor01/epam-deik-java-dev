@@ -45,7 +45,8 @@ public class ScreeningServiceImpl implements ScreeningService {
                 if (screening.isOverLapping(other, 10)) {
                     return Result.err(new OperationException("There is an overlapping in screening"));
                 } else {
-                    return Result.err(new OperationException("This would start in the break period after another screening in this room"));
+                    return Result.err(new OperationException("This would start in the break period after another "
+                            + "screening in this room"));
                 }
             }
         }

@@ -40,4 +40,5 @@ public class ScreeningCommands extends PrivilegedCommands {
         } else {
             return "An error occurred: " + res.error().getMessage();
         }
-    }}
+    }
+}
