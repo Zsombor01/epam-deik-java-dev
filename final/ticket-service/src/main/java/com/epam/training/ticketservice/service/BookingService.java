@@ -8,5 +8,4 @@ public interface BookingService {
     Result<BookingDto, OperationException> createBooking(String movieTitle, String roomName, String startTime,
                                                          String seats);
 
-    Result<String, OperationException> viewPricing(String movieTitle, String roomName, String startTime, String seats);
 }

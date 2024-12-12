@@ -1,4 +1,4 @@
-package service;
+package com.epam.training.ticketservice.test.service;
 
 import com.epam.training.ticketservice.dto.ScreeningDto;
 import com.epam.training.ticketservice.exception.AlreadyExistsException;
@@ -130,7 +130,7 @@ public class ScreeningServiceTests {
 
         assertThat(result.isOk()).isFalse();
         assertThat(result.error()).isInstanceOf(OperationException.class);
-        assertThat(result.error().getMessage()).isEqualTo("There is an overlapping in screening");
+        assertThat(result.error().getMessage()).isEqualTo("There is an overlapping screening");
         verify(screeningRepository, never()).save(any());
     }
 

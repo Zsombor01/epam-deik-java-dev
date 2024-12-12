@@ -1,8 +1,6 @@
 package com.epam.training.ticketservice.service.impl;
 
 import com.epam.training.ticketservice.component.AuthenticationHolder;
-import com.epam.training.ticketservice.component.BasePriceHolder;
-import com.epam.training.ticketservice.component.PriceCalculator;
 import com.epam.training.ticketservice.dto.BookingDto;
 import com.epam.training.ticketservice.exception.NotFoundException;
 import com.epam.training.ticketservice.exception.OperationException;
@@ -32,8 +30,6 @@ public class BookingServiceImpl implements BookingService {
     private final ScreeningRepository screeningRepository;
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
-    private final PriceCalculator calculator;
-    private final BasePriceHolder basePriceHolder;
     private final AuthenticationHolder authHolder;
 
     @Override
@@ -68,22 +64,9 @@ public class BookingServiceImpl implements BookingService {
 
         var username = authHolder.getAuthentication().getName();
         var booking = new Booking(userRepository.findByUsername(username).get(), screening.get(), seatsRaw,
-                calculator.calculate(screening.get(), basePriceHolder.getBasePrice(), seats.size()));
+                seats.size());
         bookingRepository.save(booking);
         return Result.ok(new BookingDto(booking));
-    }
-
-    @Override
-    public Result<String, OperationException> viewPricing(String movieTitle, String roomName, String startTime,
-                                                          String seatsRaw) {
-        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartTime(movieTitle, roomName,
-                LocalDateTime.parse(startTime, Screening.TIME_FORMAT));
-        if (screening.isEmpty()) {
-            return Result.err(new NotFoundException("Screening"));
-        }
-        var seats = Seat.fromString(seatsRaw);
-        int price = calculator.calculate(screening.get(), basePriceHolder.getBasePrice(), seats.size());
-        return Result.ok("The price for this booking would be " + price + " HUF");
     }
 
     private Optional<Seat> hasAlreadyTakenSeat(List<Seat> seats, Screening screening) {

@@ -1,4 +1,4 @@
-package model;
+package com.epam.training.ticketservice.test.model;
 
 import com.epam.training.ticketservice.model.Seat;
 import org.junit.jupiter.api.Test;

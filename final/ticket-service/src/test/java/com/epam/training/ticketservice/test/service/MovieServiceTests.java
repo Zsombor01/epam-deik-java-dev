@@ -1,4 +1,4 @@
-package service;
+package com.epam.training.ticketservice.test.service;
 
 import com.epam.training.ticketservice.dto.MovieDto;
 import com.epam.training.ticketservice.exception.AlreadyExistsException;

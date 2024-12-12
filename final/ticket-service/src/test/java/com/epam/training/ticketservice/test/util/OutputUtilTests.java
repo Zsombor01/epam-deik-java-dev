@@ -1,4 +1,4 @@
-package util;
+package com.epam.training.ticketservice.test.util;
 
 import com.epam.training.ticketservice.util.OutputUtils;
 import org.junit.jupiter.api.Test;
